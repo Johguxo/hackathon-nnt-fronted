@@ -1,0 +1,69 @@
+.bodybg-color {
+    background: url(../../../assets/19007.jpg) no-repeat center top;
+    background-size: cover;
+}
+
+.login-box {
+    width: 480px;
+    height: 600px;
+
+    background: #FFFFFF;
+    border: 4px solid #EFEFEF;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 70px 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+}
+
+.login-box.avatar {
+
+    position: absolute;
+    width: 355px;
+    height: 165px;
+    top: 33px;
+    left: calc(50%-33px);
+
+    background: url(../../../assets/logoIRMA.png);
+    width: 58%;
+    height: 20%;
+
+
+}
+
+.login-box label {
+
+    font-family: 'DecimaRoundW01-ABold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 28px;
+
+    color: #737373;
+}
+
+.login-box input {
+
+    font-family: 'DecimaRoundW01-ABold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #ACACAC;
+
+}
+
+.route-signUp {
+    color: black;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: underline;
+}

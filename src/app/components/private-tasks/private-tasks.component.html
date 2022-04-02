@@ -1,0 +1,47 @@
+<div class="col-12">
+    <h4>Transacciones</h4>
+    <form>
+        <div class="form-group">
+            <select class="form-select custom-select" 
+                aria-label="Default select example" 
+                name="bank_select"
+                [(ngModel)]="bankAccountSelected" *ngIf="listBankAccounts.length > 0">
+                    <option 
+                    *ngFor="let bank_account of listBankAccounts" 
+                    [value]="bank_account._id">{{ bank_account.bank.name }} - {{ bank_account.number }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text"
+            class="form-control"
+            [(ngModel)] = "dataTransaction.amount" 
+            name="amount"
+            placeholder="Cantidad"
+            required autofocus 
+            >
+        </div>
+        <div class="form-group">
+            <input type="text"
+            class="form-control"
+            [(ngModel)] = "dataTransaction.description"
+            name="description"
+            placeholder="Descripcion"
+            required autofocus 
+            >
+        </div>
+        <div class="form-group">
+            <select class="form-select custom-select" 
+            name="type transaction"
+            [(ngModel)]="dataTransaction.type">
+                <option value=1>Ingreso</option>
+                <option value=2>Salida</option>
+            </select>
+        </div>
+       
+    </form>
+    <button type="submit" 
+    class="btn btn-primary btn-block" 
+    (click)="createNewTransaction()">
+        Crear
+    </button>
+</div>

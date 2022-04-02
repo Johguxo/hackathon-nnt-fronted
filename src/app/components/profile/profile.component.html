@@ -1,0 +1,177 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-4 d-flex ">
+            <form class="row" (submit)="updateData()">
+                <div class="mb-3 col-6">
+                    <label 
+                    class="form-label">Nombres</label>
+                    <input type="text" 
+                    class="form-control" 
+                    [(ngModel)]="dataUser.first_name"
+                    name="first_name"
+                    placeholder="Nombres"
+                    disabled>
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">Apellidos</label>
+                    <input type="text"
+                     class="form-control" 
+                    [(ngModel)]="dataUser.last_name"
+                    name="last_name"
+                    placeholder="Apellidos"
+                    disabled>
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">Numero de celular</label>
+                    <input type="text" 
+                    class="form-control" 
+                    [(ngModel)]="dataProfile.mobile_number"
+                    name="mobile_number"
+                    placeholder="955 555 713">
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">Estado civil</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="dataProfile.civil_status"
+                    name="civil_status"
+                    placeholder="Soltero">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="startDate">Fecha Nacimiento</label>
+                    <input id="startDate" 
+                    class="form-control"
+                    type="date"
+                    name="date_of_birth"
+                    [(ngModel)]="dataProfile.date_of_birth">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">Nacionalidad</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="dataProfile.nacionality"
+                    name="nacionality"
+                    placeholder="Peruano">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">RUC</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="dataProfile.ruc"
+                    name="ruc"
+                    placeholder="RUC">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">Tipo de RUC</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="dataProfile.ruc_type"
+                    name="ruc_type"
+                    placeholder="Ruc Type">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">Sector</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="dataProfile.sector"
+                    name="sector"
+                    placeholder="Sector">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="exampleInputPassword1" 
+                    class="form-label">Morosidad</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="dataProfile.arrears"
+                    name="arrears"
+                    placeholder="Morosidad">
+                </div>
+
+                <button type="submit" 
+                class="btn btn-primary col-6 mx-3 my-4">Actualizar</button>
+            </form>
+        </div>
+
+        <div class="col-md-4 mt-4 px-5 ">
+            <div class="my-4" *ngIf="listBankAccounts.length == 0">
+                No hay cuentas bancarias registradas
+            </div>
+
+            <div class="row my-5 "  *ngIf="listBankAccounts.length > 0">
+                <div *ngFor="let bank_account of listBankAccounts"
+                class="card my-1 border border-3" 
+                style="width: 18rem;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ bank_account.bank.name }}</h4>
+                            <p class="card-text mt-3">
+                                 Numero de cuenta: {{ bank_account.number }}
+                            </p>
+                            <p class="card-textmt-0">
+                                 CCI: {{ bank_account.cci }}
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" 
+            class="btn btn-primary" 
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="openModal(content)">
+                Agregar cuenta bancaria
+            </button>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Agregar cuenta bancaria</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form class="row my-3">
+            <div class="mb-3 col-10 ">
+                <label for="exampleInputEmail1" 
+                class="form-label">Numero de tarjeta</label>
+                <input type="email" class="form-control" 
+                [(ngModel)]="dataBankAccount.number"
+                name="number"
+                placeholder="166225 1226663 152678"
+                    aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3 col-10 ">
+                <label for="exampleInputEmail1" 
+                class="form-label">CCI</label>
+                <input type="email" class="form-control" 
+                [(ngModel)]="dataBankAccount.cci"
+                name="cci"
+                placeholder="1665 16663 15678"
+                aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3 col-10">
+                <label for="exampleInputEmail1"
+                 class="form-label">Banco</label>
+                <select class="form-select custom-select" 
+                aria-label="Default select example" 
+                name="bank_select"
+                [(ngModel)]="bankSelected" *ngIf="listBanks.length > 0">
+                    <option 
+                    *ngFor="let bank of listBanks" 
+                    [value]="bank._id">{{ bank.name }}</option>
+                </select>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" 
+      (click)="createNewBankAccount()">Guardar</button>
+    </div>
+</ng-template>

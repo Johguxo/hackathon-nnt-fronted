@@ -1,0 +1,125 @@
+<div class="container-fluid">
+    <div class="row col-12">
+        <div class="col-lg-3 mx-5 my-5 row">
+            <div *ngIf="dataTransactions.expense" class="card border border-3 bg-primary text-white col-4 col-lg-12" style="width: 18rem;">
+                <div class="card-body">
+                  <h4 class="card-title">S/. {{ dataTransactions.expense }}</h4>
+                  <p class="card-text mt-0">Gastos anuales</p>
+                </div>
+            </div>
+            <div class="card my-1 border border-3 
+            bg-primary text-white col-4 col-lg-12" 
+            style="width: 18rem;" *ngIf="dataTransactions.income">
+                <div class="card-body">
+                  <h4 class="card-title">S/.  {{ dataTransactions.income }}</h4>
+                  <p class="card-text mt-0">Ingresos Anuales</p>
+                </div>
+            </div>
+            <div *ngIf="dataTransactions.budget" class="card my-1 border border-3 bg-primary text-white col-4  col-lg-12" style="width: 18rem;">
+                <div class="card-body">
+                  <h4 class="card-title">S/. {{ dataTransactions.budget }}</h4>
+                  <p class="card-text mt-0">Presupuesto anual</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 pt-5 border border-2">
+            <div style="display: block">
+                <canvas baseChart width="400" height="400"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-title">
+                    <h5>Ingresos VS Egresos</h5>
+                </div>
+                <div class="card-body">
+                    <canvas baseChart
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-title">
+                    <h5>Registro de movimientos bancarios</h5>
+                </div>
+                <div class="card-body">
+                    <div class="graphic">
+                        <table class="table my-5">
+                            <thead class="table-primary">
+                              <tr >
+                                  <th class="bg-primary">N°</th>
+                                  <th class="bg-primary">Fecha</th>
+                                  <th class="bg-primary">Banco</th>
+                                  <th class="bg-primary">Estado</th>
+                                  <th class="bg-primary">Monto</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                  <td>asda</td>
+                                  <td>asda</td>
+                                  <td>asda</td>
+                                  <td>asda</td>
+                                  <td>asda</td>
+                              </tr>
+                              <tr>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                            </tr>
+                            <tr>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                            </tr>
+                            <tr>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                                <td>asda</td>
+                            </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+       
+    </div>
+    <div class="recommendation row d-flex  justify-content-center">
+        <div class="card col-10 border border-3 border-dark bg-dark text-white my-5 mx-5 d-flex align-items-evenly">
+            <div class="card-title">
+                <h5>Recomendaciones</h5>
+            </div>
+            <div class="card-body row py-2">
+                <div class="col-10">
+                    <p>De acuerdo a tu evaluacion creditica, el sistema automatica recomienda:</p>
+                    <ul>
+                        <li>Fortalecer los ingresos del proximo mes. Alcanzar un 20% mas de ingresos (1000 soles)</li>
+                        <li>Se recomienda ahorrar en un banco al 1% mensual </li>
+                        <li>Limitar los egresos del proximo mes en un 15% (800 soles)</li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+    </div>
+</div>
