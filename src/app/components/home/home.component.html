@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div class="row col-12">
-        <div class="col-lg-3 mx-5 my-5 row">
+    <div class="row col-12" style="align-items: center;">
+        <div class="col-lg-3">
             <div *ngIf="dataTransactions.expense" class="card border border-3 bg-primary text-white col-4 col-lg-12" style="width: 18rem;">
                 <div class="card-body">
                   <h4 class="card-title">S/. {{ dataTransactions.expense }}</h4>
@@ -22,41 +22,58 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 pt-5 border border-2">
-            <div style="display: block">
-                <canvas baseChart width="400" height="400"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"></canvas>
+        <div class="col-lg-9 pt-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h5>Grafico de Ingresos Vs. Gastos</h5>
+                    </div>
+                    <div class="card-text">
+                        <div *ngIf="loadingChartLine">
+                            Cargando...
+                        </div>
+                        <div style="display: block" *ngIf="!loadingChartLine">
+                            <canvas baseChart width="200" height="100"
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-title">
-                    <h5>Ingresos VS Egresos</h5>
-                </div>
                 <div class="card-body">
-                    <canvas baseChart
-                    [data]="doughnutChartData"
-                    [labels]="doughnutChartLabels"
-                    [chartType]="doughnutChartType"></canvas>
+                    <div class="card-title">
+                        <h5>Ingresos Vs. Gastos</h5>
+                    </div>
+                    <div *ngIf="loadingChartDoughut">
+                        Cargando...
+                    </div>
+                    <div class="card-text" *ngIf="!loadingChartDoughut">
+                        <canvas baseChart
+                        [data]="doughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-title">
-                    <h5>Registro de movimientos bancarios</h5>
-                </div>
                 <div class="card-body">
+                    <div class="card-title">
+                        <h5>Registro de movimientos bancarios</h5>
+                    </div>
                     <div class="graphic">
-                        <table class="table my-5">
+                        <table class="table">
                             <thead class="table-primary">
                               <tr >
                                   <th class="bg-primary">N°</th>
@@ -67,34 +84,18 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                  <td>asda</td>
-                                  <td>asda</td>
-                                  <td>asda</td>
-                                  <td>asda</td>
-                                  <td>asda</td>
-                              </tr>
-                              <tr>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                            </tr>
-                            <tr>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                            </tr>
-                            <tr>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                                <td>asda</td>
-                            </tr>
+                                <tr *ngFor="let transaction of listTransactions; let i=index">
+                                    <td>{{ i }}</td>
+                                    <td>{{ transaction.createdAt | date: 'dd-MM-yyyy' }}</td>
+                                    <td><img [src]="transaction.bank_account.bank.image" style="width: 80px;"></td>
+                                    <td *ngIf="transaction.type == 1">
+                                        <span class="badge badge-success">Ingreso</span>
+                                    </td>
+                                    <td *ngIf="transaction.type == 2">
+                                        <span class="badge badge-danger">Egreso</span>
+                                    </td>
+                                    <td>{{ transaction.amount }}</td>
+                                </tr>
                             </tbody>
                           </table>
                     </div>
@@ -107,10 +108,10 @@
     </div>
     <div class="recommendation row d-flex  justify-content-center">
         <div class="card col-10 border border-3 border-dark bg-dark text-white my-5 mx-5 d-flex align-items-evenly">
-            <div class="card-title">
-                <h5>Recomendaciones</h5>
-            </div>
             <div class="card-body row py-2">
+                <div class="card-title">
+                    <h5>Recomendaciones</h5>
+                </div>
                 <div class="col-10">
                     <p>De acuerdo a tu evaluacion creditica, el sistema automatica recomienda:</p>
                     <ul>
